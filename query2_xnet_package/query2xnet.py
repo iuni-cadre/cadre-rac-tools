@@ -28,7 +28,6 @@ MAGColumnTypes = {
 	"paper_abstract":object,
 }
 
-
 def mag_query_to_xnet(argv):
 	input_file_string = argv[3]
 	output_files_string = argv[4]
