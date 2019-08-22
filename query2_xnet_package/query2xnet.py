@@ -51,7 +51,7 @@ def mag_query_to_xnet(argv):
 		if 'edges' in input_file:
 			edgesData = pd.read_csv(input_file)
 		else:
-			nodesData = pd.read_csv(input_file)
+			nodesData = pd.read_csv(input_file, dtype=MAGColumnTypes)
 
 	# Replacing NaN for empty string
 	for key in MAGColumnTypes:
