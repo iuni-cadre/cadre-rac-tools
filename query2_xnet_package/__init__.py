@@ -5,7 +5,7 @@ import igraph as ig
 import pandas as pd
 import numpy as np
 
-from . import xnet as xn
+import xnet as xn
 
 MAGColumnTypes = {
     "journal_id": object,
