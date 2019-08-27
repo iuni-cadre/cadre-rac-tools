@@ -102,10 +102,15 @@ def mag_query_input_to_xnet(nodes_file, edges_file, output_file):
 
 	graph.vs["KCore"] = graph.shell_index(mode="IN")
 	graph.vs["year"] = [int(s[0:4]) for s in graph.vs["date"]]
-	xn.igraph2xnet(graph,output_file)
+
+	giantComponent = graph.clusters(mode="WEAK").giant()
+	giantCopy = giantComponent.copy()
+	giantCopy.to_undirected()
+	giantComponent.vs["Community"] = [str(c) for c in giantCopy.community_multilevel().membership]
+	xn.igraph2xnet(giantComponent, output_file)
 
 def mag_query_id_to_xnet(queryID):
-	os.makedirs("../networks", exist_ok=True)
+	os.makedirs("networks", exist_ok=True)
 	mag_query_input_to_xnet(
 		"query-results/%s.csv"%queryID,
 		"query-results/%s_edges.csv"%queryID,

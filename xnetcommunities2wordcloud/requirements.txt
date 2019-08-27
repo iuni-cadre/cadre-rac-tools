@@ -1,0 +1,4 @@
+python-igraph
+matplotlib
+numpy
+wordcloud
