@@ -53,11 +53,13 @@ if __name__ == "__main__":
         print("Unknown Error")
         sys.exit(1)
 
-
+    total_line_count = 0
 
     for filename in _input_filenames:
         count = count_lines(filename)
-        write_file(filename, "Line Count: {0}".format(str(count)))
+        total_line_count += count
+        write_file(filename, "Line Count: {0}\n".format(str(count)))
         print("{0} - {1}".format(filename, count))
 
+    write_file('total_lines.txt', "Grand Total Count: {0}\n".format(str(total_line_count)))
     print("Contents of output directory: " + str(os.listdir(_output_dir)))
