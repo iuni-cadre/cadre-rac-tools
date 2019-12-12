@@ -4,16 +4,17 @@ import sys
 
 def issi_tutorial(argv):
     input_files = []
-    output_files = []
-    input_files_string = argv[3]
-    output_files_string = argv[4]
-    output_location = argv[5]
+    input_files_string = argv[1]
+    input_dir = argv[2]
+    output_location = argv[3]
 
     if ',' in input_files_string:
         input_files_string = "" + input_files_string + ""
-        input_files = input_files_string.split(",")
+        input_file_names = input_files_string.split(",")
+        for file_name in input_file_names:
+            input_files.append(input_dir + "/" + file_name)
     else:
-        input_files.append(input_files_string)
+        input_files.append(input_dir + "/" + input_files_string)
 
     for files in input_files:
         if (files.endswith("tar.gz")):

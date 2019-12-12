@@ -17,23 +17,19 @@ except ImportError as error:
 #Extract major component and obtain community structure using infomap
 
 def xnet_to_wordcloud(argv):
-	input_file_string = argv[3]
-	output_files_string = argv[4]
-	output_location = argv[5]
+	input_file_string = argv[1]
+	input_dir = argv[2]
+	output_dir = argv[3]
 	input_files = []
-	output_files = []
 	if ',' in input_file_string:
 		input_file_string = "" + input_file_string + ""
-		input_files = input_file_string.split(",")
+		input_file_names = input_file_string.split(",")
+		for file_name in input_file_names:
+			input_files.append(input_dir + "/" + file_name)
 	else:
-		input_files.append(input_file_string)
-	if ',' in output_files_string:
-		output_files_string = "" + output_files_string + ""
-		output_files = output_files_string.split(',')
-	else:
-		output_files.append(output_files_string)
-	
-	output_file = output_location + '/' + output_files[0]
+		input_files.append(input_dir + "/" + input_file_string)
+
+	output_file = output_dir + '/output_wc.xnet'
 	xnet_input_to_wordcloud(input_files[0], output_file)
 
 def xnet_input_to_wordcloud(input_file, output_file):

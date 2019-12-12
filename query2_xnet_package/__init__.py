@@ -36,31 +36,27 @@ MAGColumnTypes = {
 	"paper_last_page":object,
 }
 
+
 def mag_query_to_xnet(argv):
-	input_file_string = argv[3]
-	output_files_string = argv[4]
-	output_location = argv[5]
+	input_file_string = argv[1]
+	input_dir = argv[2]
+	output_dir = argv[3]
 	input_files = []
-	output_files = []
 	if ',' in input_file_string:
 		input_file_string = "" + input_file_string + ""
 		input_files = input_file_string.split(",")
 	else:
 		input_files.append(input_file_string)
-	if ',' in output_files_string:
-		output_files_string = "" + output_files_string + ""
-		output_files = output_files_string.split(',')
-	else:
-		output_files.append(output_files_string)
-	
+
 	for input_file in input_files:
 		if 'edges' in input_file:
-			edges_file = input_file
+			edges_file = input_dir + "/" + input_file
 		else:
-			nodes_file = input_file
+			nodes_file = input_dir + "/" + input_file
 
-	output_file = output_location + '/' + output_files[0]
+	output_file = output_dir + '/query_to_xnet_out.xnet'
 	mag_query_input_to_xnet(nodes_file, edges_file, output_file)
+
 
 def mag_query_input_to_xnet(nodes_file, edges_file, output_file):
 	edgesData = pd.read_csv(edges_file)
@@ -108,6 +104,7 @@ def mag_query_input_to_xnet(nodes_file, edges_file, output_file):
 	giantCopy.to_undirected()
 	giantComponent.vs["Community"] = [str(c) for c in giantCopy.community_multilevel().membership]
 	xn.igraph2xnet(giantComponent, output_file)
+
 
 def mag_query_id_to_xnet(queryID):
 	os.makedirs("networks", exist_ok=True)
