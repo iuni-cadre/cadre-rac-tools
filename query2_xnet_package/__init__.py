@@ -114,6 +114,7 @@ def mag_query_id_to_xnet(queryID):
 		"networks/"+queryID+".xnet"
 	)
 
+
 if __name__ == "__main__":
 	argv = sys.argv
 	mag_query_to_xnet(argv)

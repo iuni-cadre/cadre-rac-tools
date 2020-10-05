@@ -29,7 +29,8 @@ def xnet_to_wordcloud(argv):
 	else:
 		input_files.append(input_dir + "/" + input_file_string)
 
-	output_file = output_dir + '/output_wc.xnet'
+	output_file = output_dir + '/output_wc.pdf'
+	print(output_file)
 	xnet_input_to_wordcloud(input_files[0], output_file)
 
 def xnet_input_to_wordcloud(input_file, output_file):
