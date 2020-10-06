@@ -41,18 +41,8 @@ data_by_author = {}
 path_to_data = ''
 G = nx.Graph()
 
-# Create subgraph containing only those edges with a `weight` greater than 1, that is, co-author pairs who published more than 1 paper in the dataset.
-# + jupyter={"outputs_hidden": false}
-def filter_edge(n1, n2):
-    """Check if weight is larger than 1."""
-    return G[n1][n2]["weight"] > 1
-
-def filter_node(n, view):
-    """Filter out unconnected nodes."""
-    return not nx.is_isolate(view, n)
-
 def create_coauthor_network(input_file_name):
-    path_to_data = '{0}/{1}'.format(_input_dir, filename)
+    path_to_data = '{0}/{1}'.format(_input_dir, input_file_name)
     # Read in source data and iterate row by row.
     with open(path_to_data) as datafile:
         reader = csv.DictReader(datafile)
@@ -209,8 +199,18 @@ def create_coauthor_network(input_file_name):
 
     # + jupyter={"outputs_hidden": false}
     len(G.nodes)
+
+    # + jupyter={"outputs_hidden": false}
+    def filter_edge(n1, n2):
+        """Check if weight is larger than 1."""
+        return G[n1][n2]["weight"] > 1
+
+    def filter_node(n):
+        """Filter out unconnected nodes."""
+        return not nx.is_isolate(view, n)
+
     view = nx.subgraph_view(G, filter_edge=filter_edge)
-    subview = nx.subgraph_view(view, filter_node=filter_node(view=view))
+    subview = nx.subgraph_view(view, filter_node=filter_node)
 
     # + jupyter={"outputs_hidden": false}
     len(subview.edges()), len(subview.nodes())
