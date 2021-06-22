@@ -48,19 +48,19 @@ def create_coauthor_network(input_file_name):
         reader = csv.DictReader(datafile)
         # Each row contains one article author; thus each article will have as many rows as authors.
         for row in reader:
-            year = int(row["year"])
+            year = int(row["Paper_year"])
             # Compile data only if year is in range 1999 to 2018.
             if year < 1999 or year > 2018:
                 continue
 
-            id_ = row["paper_id"]
-            author_id = row["author_id"]
-            author_name = row["author_name"]
+            id_ = row["Paper_paper_id"]
+            author_id = row["Author_author_id"]
+            author_name = row["Author_author_name"]
 
             # Store data about each author for lookup by name.
             if author_id not in data_by_author:
                 data_by_author[author_id] = {
-                    "author_name": [row["author_name"]],
+                    "author_name": [row["Author_author_name"]],
                     "affiliation_id": [row["affiliation_id"]],
                     "last_known_affiliation_id": [row["last_known_affiliation_id"]],
                     "affiliation_name": [row["affiliation_name"]],
