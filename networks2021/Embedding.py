@@ -558,7 +558,7 @@ if __name__ == "__main__":
         edges_file,
         output_file
     )
-    visualize_figures(output_file, sentences_file, model_file, )
+    visualize_figures(output_file, sentences_file, model_file,export_file)
 
 
 
